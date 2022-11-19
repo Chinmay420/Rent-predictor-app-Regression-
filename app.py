@@ -2,15 +2,16 @@ import numpy as np
 import pickle
 import pandas as pd
 import streamlit as st
+import sklearn
 
 pickle_in = open("rf.pk1", "rb")
 rf = pickle.load(pickle_in)
 
-def predict_sellprice(Eng_Displ, Cyl, Gears, Max_Ethanol, Intake_Valves_Per_Cyl, Exhaust_Valves_Per_Cyl, Trans_Creeper_Gear, Trans_Desc, Carline_Class_Desc, Label_Recalc, Stop_Start):
+def predict_fuel_efficiency(Eng_Displ, Cyl, Gears, Max_Ethanol, Intake_Valves_Per_Cyl, Exhaust_Valves_Per_Cyl, Trans_Creeper_Gear, Trans_Desc, Carline_Class_Desc, Label_Recalc, Stop_Start):
     prediction = rf.predict([[Eng_Displ, Cyl, Gears, Max_Ethanol, Intake_Valves_Per_Cyl, Exhaust_Valves_Per_Cyl, Trans_Creeper_Gear, Trans_Desc, Carline_Class_Desc, Label_Recalc, Stop_Start]])
     return prediction
 def main():
-    st.title("Sale price prediction")
+    st.title("Fuel efficiency prediction")
     Eng_Displ = st.text_input("Eng_Displ", "Type here")
     Cyl = st.text_input("Cyl", "Type here")
     Gears = st.text_input("Gears", "Type here")
@@ -24,7 +25,7 @@ def main():
     Stop_Start = st.text_input("Stop_Start", "Type here")
     result = ""
     if st.button("Predict"):
-        result= predict_sellprice(Eng_Displ, Cyl, Gears, Max_Ethanol, Intake_Valves_Per_Cyl, Exhaust_Valves_Per_Cyl, Trans_Creeper_Gear, Trans_Desc, Carline_Class_Desc, Label_Recalc, Stop_Start)
+        result= predict_fuel_efficiency(Eng_Displ, Cyl, Gears, Max_Ethanol, Intake_Valves_Per_Cyl, Exhaust_Valves_Per_Cyl, Trans_Creeper_Gear, Trans_Desc, Carline_Class_Desc, Label_Recalc, Stop_Start)
     st.success('The output is {}'.format(result))
 if __name__ == '__main__':
     main()
