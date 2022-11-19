@@ -2,7 +2,6 @@ import numpy as np
 import pickle
 import pandas as pd
 import streamlit as st
-import sklearn
 
 pickle_in = open("rf.pk1", "rb")
 rf = pickle.load(pickle_in)
